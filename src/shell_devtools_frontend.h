@@ -37,6 +37,7 @@ class ShellDevToolsFrontend : public WebContentsObserver,
 
   // WebContentsObserver overrides
   virtual void RenderViewCreated(RenderViewHost* render_view_host) OVERRIDE;
+  virtual void DocumentOnLoadCompletedInMainFrame() OVERRIDE;
   virtual void WebContentsDestroyed() OVERRIDE;
 
   // content::DevToolsFrontendHost::Delegate implementation.
@@ -49,6 +50,8 @@ class ShellDevToolsFrontend : public WebContentsObserver,
   virtual void DispatchOnInspectorFrontend(const std::string& message) OVERRIDE;
   virtual void InspectedContentsClosing() OVERRIDE;
   virtual void ReplacedWithAnotherClient() OVERRIDE {}
+
+  virtual void InspectedURLChanged(const std::string& url);
 
   Shell* frontend_shell_;
   scoped_refptr<DevToolsAgentHost> agent_host_;
